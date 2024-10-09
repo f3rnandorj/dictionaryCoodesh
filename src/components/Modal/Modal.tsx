@@ -20,10 +20,7 @@ export function Modal() {
 
   return (
     <RNModal animationType="slide" {...modalProps}>
-      <Screen
-        flex={1}
-        scrollable
-        style={{paddingTop: top, paddingBottom: bottom}}>
+      <Screen flex={1} style={{paddingTop: top, paddingBottom: bottom}}>
         <Icon
           name="close"
           onPress={hideModal}

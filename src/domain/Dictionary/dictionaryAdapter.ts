@@ -12,6 +12,7 @@ function toWord(data: WordApi): Word {
     word: data.word,
     meanings: data.meanings,
     phonetics: data.phonetics[0],
+    partOfSpeech: data.meanings[0].partOfSpeech,
   };
 }
 

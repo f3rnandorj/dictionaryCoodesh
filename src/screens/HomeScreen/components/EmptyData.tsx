@@ -6,17 +6,22 @@ import {Button} from '../../../components/Button/Button';
 
 interface Props {
   error: boolean | null;
+  messageError: string;
   loading: boolean;
-  refetch: () => void;
+  refetch?: () => void;
 }
 
-export function EmptyData({error, loading, refetch}: Props) {
+export function EmptyData({error, messageError, loading, refetch}: Props) {
   if (error) {
     return (
       <Box flex={1} justifyContent="center" alignItems="center" gap="s8">
-        <Text preset="headingMedium">Erro ao buscar a lista...</Text>
+        <Text textAlign="center" preset="headingMedium">
+          {messageError}
+        </Text>
 
-        <Button width={'100%'} title="Tentar novamente" onPress={refetch} />
+        {refetch && (
+          <Button width={'100%'} title="Tentar novamente" onPress={refetch} />
+        )}
       </Box>
     );
   }
@@ -24,7 +29,9 @@ export function EmptyData({error, loading, refetch}: Props) {
   if (loading) {
     return (
       <Box flex={1} justifyContent="center" alignItems="center" gap="s8">
-        <Text preset="headingMedium">Carregando...</Text>
+        <Text textAlign="center" preset="headingMedium">
+          Carregando...
+        </Text>
         <ActivityIndicator />
       </Box>
     );

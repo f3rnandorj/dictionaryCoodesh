@@ -1,24 +1,49 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Box} from '../../../components/Box/Box';
 import {Text} from '../../../components/Text/Text';
 import {Icon} from '../../../components/Icon/Icon';
 import {Button} from '../../../components/Button/Button';
 import {useDictionaryGetWordDetails} from '../../../domain/Dictionary/useCases/useDictionaryGetWordDetails';
 import {EmptyData} from './EmptyData';
+import {useAppTheme} from '../../../hooks/useAppTheme';
+import {Screen} from '../../../components/Screen/Screen';
 
 interface Props {
   word: string;
 }
 
 export function WordDetails({word}: Props) {
-  const {data, isError, isLoading, refetch} = useDictionaryGetWordDetails(word);
+  const [hasDefinition, setHasDefinition] = useState(true);
+  const {data, isError, isLoading, refetch} = useDictionaryGetWordDetails(
+    word,
+    {
+      onError: error => {
+        if (error?.statusCode && error.statusCode === 404) {
+          setHasDefinition(false);
+        }
+      },
+    },
+  );
+
+  const {spacing} = useAppTheme();
 
   if (isLoading || isError) {
-    return <EmptyData error={isError} loading={isLoading} refetch={refetch} />;
+    return (
+      <EmptyData
+        error={isError}
+        messageError={
+          hasDefinition
+            ? 'Erro ao buscar detalhes, tente novamente.'
+            : `Detalhes da palavra "${word}" não disponíveis`
+        }
+        loading={isLoading}
+        refetch={hasDefinition ? refetch : undefined}
+      />
+    );
   }
 
   return (
-    <Box flex={1} gap="s16">
+    <Screen flex={1} gap="s16" scrollable>
       <Box
         height={200}
         width={'100%'}
@@ -49,6 +74,11 @@ export function WordDetails({word}: Props) {
       <Text preset="headingLarge" bold>
         Meanings
       </Text>
+
+      <Text bold style={{marginTop: -spacing.s10}}>
+        {data?.partOfSpeech}
+      </Text>
+
       {data?.meanings.map(meaning =>
         meaning.definitions.map((definition, index) => (
           <Text key={index} preset="paragraphSmall">
@@ -61,6 +91,6 @@ export function WordDetails({word}: Props) {
         <Button flex={1} title="Voltar" />
         <Button flex={1} title="Próximo" />
       </Box>
-    </Box>
+    </Screen>
   );
 }

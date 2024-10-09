@@ -39,7 +39,14 @@ export function WordList() {
   }
 
   if (isLoading || isError) {
-    return <EmptyData error={isError} loading={isLoading} refetch={refetch} />;
+    return (
+      <EmptyData
+        error={isError}
+        messageError="Erro ao buscar a lista..."
+        loading={isLoading}
+        refetch={refetch}
+      />
+    );
   }
 
   return (

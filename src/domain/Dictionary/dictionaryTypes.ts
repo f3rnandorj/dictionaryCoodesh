@@ -10,6 +10,7 @@ export interface Word {
   word: string;
   meanings: Meaning[];
   phonetics: Phonetic;
+  partOfSpeech: string;
 }
 
 export interface WordApi {
