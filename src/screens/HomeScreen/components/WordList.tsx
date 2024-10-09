@@ -10,7 +10,7 @@ import {WordDetails} from './WordDetails';
 export function WordList() {
   const {data, isError, isLoading, refetch} = useDictionaryGetWordsList();
 
-  const {showModal} = useModal();
+  const {showModal, hideModal} = useModal();
 
   function renderItem({item, index}: ListRenderItemInfo<string>) {
     const isFirstColumn = index % 3 === 0;
@@ -18,7 +18,7 @@ export function WordList() {
 
     function handlePressItem() {
       showModal({
-        children: () => WordDetails({word: item}),
+        children: () => WordDetails({word: item, hideModal}),
       });
     }
 
@@ -44,7 +44,7 @@ export function WordList() {
         error={isError}
         messageError="Erro ao buscar a lista..."
         loading={isLoading}
-        refetch={refetch}
+        onErrorPressButton={refetch}
       />
     );
   }

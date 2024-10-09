@@ -36,11 +36,11 @@ export function Icon({
           <MCIcon
             name={name}
             size={size}
-            color={disabled ? colors.gray4 : color}
+            color={disabled ? colors.gray4 : colors[color]}
           />
         </TouchableOpacityBox>
       ) : (
-        <MCIcon name={name} size={size} color={color} />
+        <MCIcon name={name} size={size} color={colors[color]} />
       )}
     </Box>
   );

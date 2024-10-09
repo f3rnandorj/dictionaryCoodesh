@@ -8,10 +8,17 @@ interface Props {
   error: boolean | null;
   messageError: string;
   loading: boolean;
-  refetch?: () => void;
+  onErrorPressButton: () => void;
+  buttonTitle?: string;
 }
 
-export function EmptyData({error, messageError, loading, refetch}: Props) {
+export function EmptyData({
+  error,
+  messageError,
+  loading,
+  onErrorPressButton,
+  buttonTitle,
+}: Props) {
   if (error) {
     return (
       <Box flex={1} justifyContent="center" alignItems="center" gap="s8">
@@ -19,9 +26,11 @@ export function EmptyData({error, messageError, loading, refetch}: Props) {
           {messageError}
         </Text>
 
-        {refetch && (
-          <Button width={'100%'} title="Tentar novamente" onPress={refetch} />
-        )}
+        <Button
+          width={'100%'}
+          title={buttonTitle ?? 'Tentar novamente'}
+          onPress={onErrorPressButton}
+        />
       </Box>
     );
   }

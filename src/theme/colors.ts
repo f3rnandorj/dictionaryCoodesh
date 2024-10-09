@@ -9,6 +9,7 @@ export const palette = {
 
   redLight: '#e3c9d9',
   blueLight: '#B7DCEF',
+  yellowStar: '#FFD700',
 };
 
 const theme = {
@@ -16,6 +17,8 @@ const theme = {
 
   primary: palette.redLight,
   secondary: palette.blueLight,
+
+  starColor: palette.yellowStar,
 
   background: palette.grayWhite,
   backgroundContrast: palette.grayBlack,

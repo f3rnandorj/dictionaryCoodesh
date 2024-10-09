@@ -7,12 +7,14 @@ import {useDictionaryGetWordDetails} from '../../../domain/Dictionary/useCases/u
 import {EmptyData} from './EmptyData';
 import {useAppTheme} from '../../../hooks/useAppTheme';
 import {Screen} from '../../../components/Screen/Screen';
+import {FavoriteButton} from '../../../components/FavoriteButton/FavoriteButton';
 
 interface Props {
   word: string;
+  hideModal: () => void;
 }
 
-export function WordDetails({word}: Props) {
+export function WordDetails({word, hideModal}: Props) {
   const [hasDefinition, setHasDefinition] = useState(true);
   const {data, isError, isLoading, refetch} = useDictionaryGetWordDetails(
     word,
@@ -27,7 +29,7 @@ export function WordDetails({word}: Props) {
 
   const {spacing} = useAppTheme();
 
-  if (isLoading || isError) {
+  if (isLoading || isError || !data) {
     return (
       <EmptyData
         error={isError}
@@ -37,13 +39,14 @@ export function WordDetails({word}: Props) {
             : `Detalhes da palavra "${word}" não disponíveis`
         }
         loading={isLoading}
-        refetch={hasDefinition ? refetch : undefined}
+        onErrorPressButton={hasDefinition ? refetch : hideModal}
+        buttonTitle="Voltar para tela inicial"
       />
     );
   }
 
   return (
-    <Screen flex={1} gap="s16" scrollable>
+    <Screen flex={1} gap="s16" scrollable noPaddingHorizontal>
       <Box
         height={200}
         width={'100%'}
@@ -57,6 +60,8 @@ export function WordDetails({word}: Props) {
           {data?.phonetics?.text ?? 'Fonética não encontrada'}
         </Text>
       </Box>
+
+      <FavoriteButton data={data} />
 
       <Box flexDirection="row" alignItems="center">
         <Icon name="play-outline" size={30} />
