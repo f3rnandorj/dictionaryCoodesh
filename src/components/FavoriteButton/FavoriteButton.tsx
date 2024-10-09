@@ -27,21 +27,20 @@ export function FavoriteButton({data}: Props) {
     } else {
       addWord(data);
     }
-
-    setFavoriteWord();
   }
 
   useEffect(() => {
     setFavoriteWord();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [favoriteWordList]);
 
   return (
     <PressableBox
       onPress={handlePressButton}
       flexDirection="row"
       justifyContent="center"
-      alignItems="center">
+      alignItems="center"
+      hitSlop={20}>
       <Text pr="s10">Adicionar aos favoritos</Text>
       <Icon
         name={isFavoriteWord ? 'star' : 'star-outline'}

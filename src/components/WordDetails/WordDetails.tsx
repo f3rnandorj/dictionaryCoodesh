@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {useDictionaryGetWordDetails} from '../../domain/Dictionary/useCases/useDictionaryGetWordDetails';
-import {useAppTheme} from '../../hooks/useAppTheme';
 import {EmptyData} from '../EmptyData/EmptyData';
 import {Screen} from '../Screen/Screen';
 import {Box} from '../Box/Box';
@@ -26,8 +25,6 @@ export function WordDetails({word, hideModal}: Props) {
       },
     },
   );
-
-  const {spacing} = useAppTheme();
 
   if (isLoading || isError || !data) {
     return (
@@ -76,13 +73,12 @@ export function WordDetails({word, hideModal}: Props) {
         </Box>
       </Box>
 
-      <Text preset="headingLarge" bold>
-        Meanings
-      </Text>
-
-      <Text bold style={{marginTop: -spacing.s10}}>
-        {data?.partOfSpeech}
-      </Text>
+      <Box>
+        <Text preset="headingLarge" bold>
+          Meanings
+        </Text>
+        <Text bold>{data?.partOfSpeech}</Text>
+      </Box>
 
       {data?.meanings.map(meaning =>
         meaning.definitions.map((definition, index) => (

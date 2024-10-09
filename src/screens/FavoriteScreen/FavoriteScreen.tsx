@@ -1,12 +1,12 @@
 import React from 'react';
 import {Screen} from '../../components/Screen/Screen';
-import {Text} from '../../components/Text/Text';
 import {AppTabScreenProps} from '../../routes/navigationType';
+import {FavoriteList} from './components/FavoriteList';
 
 export function FavoriteScreen({}: AppTabScreenProps<'FavoriteScreen'>) {
   return (
-    <Screen>
-      <Text>FavoriteScreen</Text>
+    <Screen flex={1} screenTitle="Favorites">
+      <FavoriteList />
     </Screen>
   );
 }
