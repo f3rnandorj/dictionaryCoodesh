@@ -1,8 +1,8 @@
 import React from 'react';
-import {Box} from '../../../components/Box/Box';
-import {Text} from '../../../components/Text/Text';
-import {ActivityIndicator} from '../../../components/ActivityIndicator/ActivityIndicator';
-import {Button} from '../../../components/Button/Button';
+import {Box} from '../Box/Box';
+import {Text} from '../Text/Text';
+import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
+import {Button} from '../Button/Button';
 
 interface Props {
   error: boolean | null;
@@ -12,7 +12,7 @@ interface Props {
   buttonTitle?: string;
 }
 
-export function HomeEmptyData({
+export function EmptyData({
   error,
   messageError,
   loading,

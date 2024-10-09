@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDictionaryGetWordsList} from '../../../domain/Dictionary/useCases/useDictionaryGetWordsList';
-import {HomeEmptyData} from './HomeEmptyData';
+import {EmptyData} from '../../../components/EmptyData/EmptyData';
 import {WordList} from '../../../components/WordList/WordList';
 
 export function HomeList() {
@@ -8,7 +8,7 @@ export function HomeList() {
 
   if (isLoading || isError) {
     return (
-      <HomeEmptyData
+      <EmptyData
         error={isError}
         messageError="Erro ao buscar a lista..."
         loading={isLoading}

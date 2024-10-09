@@ -3,8 +3,8 @@ import {Text} from '../Text/Text';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {PressableBox} from '../Box/Box';
 import {useModal} from '../../services/modal/useModal';
-import {WordDetails} from '../../screens/HomeScreen/components/WordDetails';
 import {Dictionary} from '../../domain/Dictionary/dictionaryTypes';
+import {WordDetails} from '../WordDetails/WordDetails';
 
 interface WordListProps {
   data: Dictionary;

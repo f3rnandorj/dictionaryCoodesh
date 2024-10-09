@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
-import {Box} from '../../../components/Box/Box';
-import {Text} from '../../../components/Text/Text';
-import {Icon} from '../../../components/Icon/Icon';
-import {Button} from '../../../components/Button/Button';
-import {useDictionaryGetWordDetails} from '../../../domain/Dictionary/useCases/useDictionaryGetWordDetails';
-import {useAppTheme} from '../../../hooks/useAppTheme';
-import {Screen} from '../../../components/Screen/Screen';
-import {FavoriteButton} from '../../../components/FavoriteButton/FavoriteButton';
-import {HomeEmptyData} from './HomeEmptyData';
+import {useDictionaryGetWordDetails} from '../../domain/Dictionary/useCases/useDictionaryGetWordDetails';
+import {useAppTheme} from '../../hooks/useAppTheme';
+import {EmptyData} from '../EmptyData/EmptyData';
+import {Screen} from '../Screen/Screen';
+import {Box} from '../Box/Box';
+import {Text} from '../Text/Text';
+import {FavoriteButton} from '../FavoriteButton/FavoriteButton';
+import {Icon} from '../Icon/Icon';
+import {Button} from '../Button/Button';
 
 interface Props {
   word: string;
@@ -31,7 +31,7 @@ export function WordDetails({word, hideModal}: Props) {
 
   if (isLoading || isError || !data) {
     return (
-      <HomeEmptyData
+      <EmptyData
         error={isError}
         messageError={
           hasDefinition
