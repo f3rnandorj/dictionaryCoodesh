@@ -5,7 +5,7 @@ import {PressableBox} from '../../../components/Box/Box';
 import {useDictionaryGetWordsList} from '../../../domain/Dictionary/useCases/useDictionaryGetWordsList';
 import {EmptyList} from './EmptyList';
 import {useModal} from '../../../services/modal/useModal';
-import {Screen} from '../../../components/Screen/Screen';
+import {WordDetails} from './WordDetails';
 
 export function WordList() {
   const {data, isError, isLoading, refetch} = useDictionaryGetWordsList();
@@ -18,7 +18,7 @@ export function WordList() {
 
     function handlePressItem() {
       showModal({
-        children: () => ModalScreen({title: item}),
+        children: () => WordDetails({title: item}),
       });
     }
 
@@ -54,13 +54,5 @@ export function WordList() {
         />
       )}
     </>
-  );
-}
-
-function ModalScreen({title}: {title: string}) {
-  return (
-    <Screen>
-      <Text>{title}</Text>
-    </Screen>
   );
 }

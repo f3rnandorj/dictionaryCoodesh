@@ -6,10 +6,16 @@ export const palette = {
   gray4: '#E1E1E1',
   gray5: '#F5F5F5',
   grayWhite: '#FFFFFF',
+
+  redLight: '#e3c9d9',
+  blueLight: '#B7DCEF',
 };
 
 const theme = {
   ...palette,
+
+  primary: palette.redLight,
+  secondary: palette.blueLight,
 
   background: palette.grayWhite,
   backgroundContrast: palette.grayBlack,

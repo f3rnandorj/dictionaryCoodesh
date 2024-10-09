@@ -23,10 +23,10 @@ export function Icon({
   size = 26,
   ...touchableOpacityBoxProps
 }: Props) {
-  const {colors} = useAppTheme();
+  const {colors, spacing} = useAppTheme();
 
   return (
-    <Box>
+    <Box style={{marginLeft: -spacing.s4}}>
       {onPress ? (
         <TouchableOpacityBox
           disabled={disabled}
