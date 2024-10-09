@@ -4,10 +4,10 @@ import {Text} from '../../../components/Text/Text';
 import {Icon} from '../../../components/Icon/Icon';
 import {Button} from '../../../components/Button/Button';
 import {useDictionaryGetWordDetails} from '../../../domain/Dictionary/useCases/useDictionaryGetWordDetails';
-import {EmptyData} from './EmptyData';
 import {useAppTheme} from '../../../hooks/useAppTheme';
 import {Screen} from '../../../components/Screen/Screen';
 import {FavoriteButton} from '../../../components/FavoriteButton/FavoriteButton';
+import {HomeEmptyData} from './HomeEmptyData';
 
 interface Props {
   word: string;
@@ -31,7 +31,7 @@ export function WordDetails({word, hideModal}: Props) {
 
   if (isLoading || isError || !data) {
     return (
-      <EmptyData
+      <HomeEmptyData
         error={isError}
         messageError={
           hasDefinition

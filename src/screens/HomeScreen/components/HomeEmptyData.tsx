@@ -12,7 +12,7 @@ interface Props {
   buttonTitle?: string;
 }
 
-export function EmptyData({
+export function HomeEmptyData({
   error,
   messageError,
   loading,

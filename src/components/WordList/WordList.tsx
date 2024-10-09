@@ -1,15 +1,16 @@
 import React from 'react';
-import {Text} from '../../../components/Text/Text';
+import {Text} from '../Text/Text';
 import {FlatList, ListRenderItemInfo} from 'react-native';
-import {PressableBox} from '../../../components/Box/Box';
-import {useDictionaryGetWordsList} from '../../../domain/Dictionary/useCases/useDictionaryGetWordsList';
-import {EmptyData} from './EmptyData';
-import {useModal} from '../../../services/modal/useModal';
-import {WordDetails} from './WordDetails';
+import {PressableBox} from '../Box/Box';
+import {useModal} from '../../services/modal/useModal';
+import {WordDetails} from '../../screens/HomeScreen/components/WordDetails';
+import {Dictionary} from '../../domain/Dictionary/dictionaryTypes';
 
-export function WordList() {
-  const {data, isError, isLoading, refetch} = useDictionaryGetWordsList();
+interface WordListProps {
+  data: Dictionary;
+}
 
+export function WordList({data}: WordListProps) {
   const {showModal, hideModal} = useModal();
 
   function renderItem({item, index}: ListRenderItemInfo<string>) {
@@ -35,17 +36,6 @@ export function WordList() {
         onPress={handlePressItem}>
         <Text>{item}</Text>
       </PressableBox>
-    );
-  }
-
-  if (isLoading || isError) {
-    return (
-      <EmptyData
-        error={isError}
-        messageError="Erro ao buscar a lista..."
-        loading={isLoading}
-        onErrorPressButton={refetch}
-      />
     );
   }
 
