@@ -7,7 +7,6 @@ function toDictionaryWordsList(word: DictionaryApi): Dictionary {
 }
 
 function toWord(data: WordApi): Word {
-  console.log(data);
   return {
     word: data.word,
     meanings: data.meanings,

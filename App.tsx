@@ -8,6 +8,10 @@ import {Router} from './src/routes/Routes';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {ContextProviders} from './src/context';
 import {Modal} from './src/components/Modal/Modal';
+import {initializeStorage} from './src/services/storage/storage';
+import {MMKVStorage} from './src/services/storage/implementation/MMKVStorage';
+
+initializeStorage(MMKVStorage);
 
 const queryClient = new QueryClient();
 
