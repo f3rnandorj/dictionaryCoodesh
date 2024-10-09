@@ -31,7 +31,7 @@ export function Icon({
         <TouchableOpacityBox
           disabled={disabled}
           onPress={onPress}
-          hitSlop={10}
+          hitSlop={20}
           {...touchableOpacityBoxProps}>
           <MCIcon
             name={name}

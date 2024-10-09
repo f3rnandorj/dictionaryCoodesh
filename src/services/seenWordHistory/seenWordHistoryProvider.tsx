@@ -23,13 +23,9 @@ export function SeenWordHistoryProvider({
   async function addWord(word: string) {
     const storedList = await getItem<string[]>(key);
 
-    const existsData = storedList?.some(item => item === word);
+    const filteredList = storedList?.filter(item => item !== word) || [];
 
-    if (existsData) {
-      removeWord(word);
-    }
-
-    const updatedList = storedList ? [...storedList, word] : [word];
+    const updatedList = [word, ...filteredList];
 
     setList(updatedList);
     setItem(key, updatedList);
@@ -56,6 +52,7 @@ export function SeenWordHistoryProvider({
 
   async function clearWordList() {
     removeItem(key);
+    setList([]);
   }
 
   /* eslint-disable react-hooks/exhaustive-deps */

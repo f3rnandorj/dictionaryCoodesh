@@ -37,7 +37,7 @@ export function WordDetails({word, hideModal}: Props) {
         }
         loading={isLoading}
         onErrorPressButton={hasDefinition ? refetch : hideModal}
-        buttonTitle="Voltar para tela inicial"
+        buttonTitle="Voltar para tela anterior"
       />
     );
   }
