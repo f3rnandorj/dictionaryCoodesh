@@ -21,7 +21,7 @@ export function Screen({
   style,
   ...boxProps
 }: Props) {
-  const {colors, spacing} = useAppTheme();
+  const {colors} = useAppTheme();
   const {bottom} = useAppSafeArea();
 
   const Container = scrollable ? ScrollViewContainer : ViewContainer;
@@ -33,10 +33,15 @@ export function Screen({
       <Container backgroundColor={colors.background}>
         <Box
           paddingHorizontal={noPaddingHorizontal ? undefined : 's24'}
-          style={[{paddingTop: spacing.s10, paddingBottom: bottom}, style]}
+          paddingTop={screenTitle ? undefined : 's16'}
+          style={[{paddingBottom: bottom}, style]}
           {...boxProps}>
           {screenTitle && (
-            <Text preset="paragraphLarge" semiBold paddingTop="s10">
+            <Text
+              preset="paragraphLarge"
+              semiBold
+              paddingTop="s16"
+              paddingBottom="s16">
               {screenTitle}
             </Text>
           )}
