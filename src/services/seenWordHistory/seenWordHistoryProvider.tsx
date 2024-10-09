@@ -1,6 +1,5 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {storage} from '../storage/storage';
-import {Word} from '../../domain/Dictionary/dictionaryTypes';
 import {SeenWordHistoryService} from './seenWordHistoryTypes';
 
 export const SeenWordHistoryContext = createContext<SeenWordHistoryService>({
@@ -21,27 +20,32 @@ export function SeenWordHistoryProvider({
 
   const {getItem, setItem, removeItem} = storage;
 
-  async function addWord(data: Word) {
-    const storedList = await getItem<Word[]>(key);
+  async function addWord(word: string) {
+    const storedList = await getItem<string[]>(key);
 
-    const updatedList = storedList ? [...storedList, data] : [data];
+    const existsData = storedList?.some(item => item === word);
+
+    if (existsData) {
+      removeWord(word);
+    }
+
+    const updatedList = storedList ? [...storedList, word] : [word];
 
     setList(updatedList);
     setItem(key, updatedList);
   }
 
-  async function removeWord(word: Word['word']) {
-    const storedList = await getItem<Word[]>(key);
+  async function removeWord(word: string) {
+    const storedList = await getItem<string[]>(key);
 
-    const updatedList =
-      storedList && storedList.filter(item => item.word !== word);
+    const updatedList = storedList && storedList.filter(item => item !== word);
 
     setList(updatedList);
     setItem(key, updatedList);
   }
 
   async function getList() {
-    const storedList = await getItem<Word[]>(key);
+    const storedList = await getItem<string[]>(key);
 
     if (storedList) {
       setList(storedList);

@@ -2,9 +2,12 @@ import React from 'react';
 import {useDictionaryGetWordsList} from '../../../domain/Dictionary/useCases/useDictionaryGetWordsList';
 import {EmptyData} from '../../../components/EmptyData/EmptyData';
 import {WordList} from '../../../components/WordList/WordList';
+import {useSeenWordHistory} from '../../../services/seenWordHistory/useSeenWordHistory';
 
 export function HomeList() {
   const {data, isError, isLoading, refetch} = useDictionaryGetWordsList();
+
+  const {addWord} = useSeenWordHistory();
 
   if (isLoading || isError) {
     return (
@@ -17,5 +20,5 @@ export function HomeList() {
     );
   }
 
-  return data ? <WordList data={data} /> : null;
+  return data ? <WordList data={data} onPressItem={addWord} /> : null;
 }

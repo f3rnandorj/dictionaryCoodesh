@@ -8,9 +8,10 @@ import {WordDetails} from '../WordDetails/WordDetails';
 
 interface WordListProps {
   data: Dictionary;
+  onPressItem?: (word: string) => void;
 }
 
-export function WordList({data}: WordListProps) {
+export function WordList({data, onPressItem}: WordListProps) {
   const {showModal, hideModal} = useModal();
 
   function renderItem({item, index}: ListRenderItemInfo<string>) {
@@ -18,6 +19,8 @@ export function WordList({data}: WordListProps) {
     const isLastColumn = index % 3 === 2;
 
     function handlePressItem() {
+      onPressItem && onPressItem(item);
+
       showModal({
         children: () => WordDetails({word: item, hideModal}),
       });
