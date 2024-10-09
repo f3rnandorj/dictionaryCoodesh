@@ -2,7 +2,6 @@ import React from 'react';
 import {Box} from '../../../components/Box/Box';
 import {Text} from '../../../components/Text/Text';
 import {ActivityIndicator} from '../../../components/ActivityIndicator/ActivityIndicator';
-import {useAppSafeArea} from '../../../hooks/useAppSafeArea';
 import {Button} from '../../../components/Button/Button';
 
 interface Props {
@@ -11,32 +10,20 @@ interface Props {
   refetch: () => void;
 }
 
-export function EmptyList({error, loading, refetch}: Props) {
-  const {top} = useAppSafeArea();
-
+export function EmptyData({error, loading, refetch}: Props) {
   if (error) {
     return (
-      <Box
-        flex={1}
-        justifyContent="center"
-        alignItems="center"
-        gap="s8"
-        style={{marginTop: -top}}>
+      <Box flex={1} justifyContent="center" alignItems="center" gap="s8">
         <Text preset="headingMedium">Erro ao buscar a lista...</Text>
 
-        <Button title="Tentar novamente" onPress={refetch} />
+        <Button width={'100%'} title="Tentar novamente" onPress={refetch} />
       </Box>
     );
   }
 
   if (loading) {
     return (
-      <Box
-        flex={1}
-        justifyContent="center"
-        alignItems="center"
-        gap="s8"
-        style={{marginTop: -top}}>
+      <Box flex={1} justifyContent="center" alignItems="center" gap="s8">
         <Text preset="headingMedium">Carregando...</Text>
         <ActivityIndicator />
       </Box>

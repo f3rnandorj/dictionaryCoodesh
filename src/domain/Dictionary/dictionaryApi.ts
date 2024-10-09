@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {DictionaryApi} from './dictionaryTypes';
+import {DictionaryApi, WordApi} from './dictionaryTypes';
+import {api} from '../../api/apiConfig';
 
 async function getWordsList(): Promise<DictionaryApi> {
   const response = await axios.get<DictionaryApi>(
@@ -9,6 +10,13 @@ async function getWordsList(): Promise<DictionaryApi> {
   return response.data;
 }
 
+async function getWordDetails(word: string): Promise<WordApi[]> {
+  const response = await api.get<WordApi[]>(`api/v2/entries/en/${word}`);
+
+  return response.data;
+}
+
 export const dictionaryApi = {
   getWordsList,
+  getWordDetails,
 };

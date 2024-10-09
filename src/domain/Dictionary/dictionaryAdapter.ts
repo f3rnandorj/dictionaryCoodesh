@@ -1,9 +1,18 @@
-import {Dictionary, DictionaryApi} from './dictionaryTypes';
+import {Dictionary, DictionaryApi, Word, WordApi} from './dictionaryTypes';
 
-function toDictionaryWord(word: DictionaryApi): Dictionary {
+function toDictionaryWordsList(word: DictionaryApi): Dictionary {
   return {
     words: Object.keys(word),
   };
 }
 
-export const dictionaryAdapter = {toDictionaryWord};
+function toWord(data: WordApi): Word {
+  console.log(data);
+  return {
+    word: data.word,
+    meanings: data.meanings,
+    phonetics: data.phonetics[0],
+  };
+}
+
+export const dictionaryAdapter = {toDictionaryWordsList, toWord};

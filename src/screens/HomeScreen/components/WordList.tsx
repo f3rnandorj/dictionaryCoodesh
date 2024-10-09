@@ -3,7 +3,7 @@ import {Text} from '../../../components/Text/Text';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {PressableBox} from '../../../components/Box/Box';
 import {useDictionaryGetWordsList} from '../../../domain/Dictionary/useCases/useDictionaryGetWordsList';
-import {EmptyList} from './EmptyList';
+import {EmptyData} from './EmptyData';
 import {useModal} from '../../../services/modal/useModal';
 import {WordDetails} from './WordDetails';
 
@@ -18,7 +18,7 @@ export function WordList() {
 
     function handlePressItem() {
       showModal({
-        children: () => WordDetails({title: item}),
+        children: () => WordDetails({word: item}),
       });
     }
 
@@ -39,7 +39,7 @@ export function WordList() {
   }
 
   if (isLoading || isError) {
-    return <EmptyList error={isError} loading={isLoading} refetch={refetch} />;
+    return <EmptyData error={isError} loading={isLoading} refetch={refetch} />;
   }
 
   return (

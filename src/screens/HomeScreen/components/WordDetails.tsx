@@ -3,9 +3,20 @@ import {Box} from '../../../components/Box/Box';
 import {Text} from '../../../components/Text/Text';
 import {Icon} from '../../../components/Icon/Icon';
 import {Button} from '../../../components/Button/Button';
-import {stringUtils} from '../../../utils/stringUtils';
+import {useDictionaryGetWordDetails} from '../../../domain/Dictionary/useCases/useDictionaryGetWordDetails';
+import {EmptyData} from './EmptyData';
 
-export function WordDetails({title}: {title: string}) {
+interface Props {
+  word: string;
+}
+
+export function WordDetails({word}: Props) {
+  const {data, isError, isLoading, refetch} = useDictionaryGetWordDetails(word);
+
+  if (isLoading || isError) {
+    return <EmptyData error={isError} loading={isLoading} refetch={refetch} />;
+  }
+
   return (
     <Box flex={1} gap="s16">
       <Box
@@ -16,8 +27,10 @@ export function WordDetails({title}: {title: string}) {
         gap="s10"
         borderWidth={1}
         backgroundColor="primary">
-        <Text preset="paragraphLarge">{title}</Text>
-        <Text preset="paragraphLarge">{title}</Text>
+        <Text preset="paragraphLarge">{data?.word}</Text>
+        <Text preset="paragraphLarge">
+          {data?.phonetics?.text ?? 'Fonética não encontrada'}
+        </Text>
       </Box>
 
       <Box flexDirection="row" alignItems="center">
@@ -34,13 +47,19 @@ export function WordDetails({title}: {title: string}) {
       </Box>
 
       <Text preset="headingLarge" bold>
-        {stringUtils.CapitalizeFirstLetter(title)}
+        Meanings
       </Text>
-      <Text preset="paragraphSmall">{title}</Text>
+      {data?.meanings.map(meaning =>
+        meaning.definitions.map((definition, index) => (
+          <Text key={index} preset="paragraphSmall">
+            - {`${definition?.definition ?? 'Nenhuma definição encontrada'}`}
+          </Text>
+        )),
+      )}
 
       <Box flexDirection="row" gap="s10">
-        <Button title="Voltar" />
-        <Button title="Próximo" />
+        <Button flex={1} title="Voltar" />
+        <Button flex={1} title="Próximo" />
       </Box>
     </Box>
   );

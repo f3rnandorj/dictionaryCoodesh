@@ -1,31 +1,37 @@
 export interface Dictionary {
-  words: WordEntry['word'][];
+  words: Word['word'][];
 }
 
 export interface DictionaryApi {
   [word: string]: number;
 }
 
-export interface WordEntry {
+export interface Word {
   word: string;
+  meanings: Meaning[];
+  phonetics: Phonetic;
 }
 
-export interface WordEntryApi {
+export interface WordApi {
   word: string;
-  phonetic?: string;
   phonetics: Phonetic[];
-  origin?: string;
   meanings: Meaning[];
+  license: License;
+  sourceUrls: string[];
+}
+
+interface License {
+  name: string;
+  url: string;
 }
 
 interface Phonetic {
-  text: string;
+  text?: string;
   audio?: string;
 }
 
 interface Definition {
   definition: string;
-  example?: string;
   synonyms: string[];
   antonyms: string[];
 }
@@ -33,4 +39,6 @@ interface Definition {
 interface Meaning {
   partOfSpeech: string;
   definitions: Definition[];
+  synonyms: string[];
+  antonyms: string[];
 }
