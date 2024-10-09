@@ -2,7 +2,7 @@ import {Dictionary, DictionaryApi} from './dictionaryTypes';
 
 function toDictionaryWord(word: DictionaryApi): Dictionary {
   return {
-    word: Object.keys(word),
+    words: Object.keys(word),
   };
 }
 

@@ -1,5 +1,5 @@
 export interface Dictionary {
-  word: WordEntry['word'][];
+  words: WordEntry['word'][];
 }
 
 export interface DictionaryApi {

@@ -1,10 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Text} from '../../../components/Text/Text';
 import {FlatList, ListRenderItemInfo} from 'react-native';
 import {PressableBox} from '../../../components/Box/Box';
+import {useDictionaryGetWordsList} from '../../../domain/Dictionary/useCases/useDictionaryGetWordsList';
+import {EmptyList} from './EmptyList';
 
 export function WordList() {
-  const [words, setWords] = useState<string[]>([]);
+  const {data, isError, isLoading, refetch} = useDictionaryGetWordsList();
 
   function renderItem({item, index}: ListRenderItemInfo<string>) {
     const isFirstColumn = index % 3 === 0;
@@ -24,26 +26,21 @@ export function WordList() {
     );
   }
 
-  useEffect(() => {
-    const fetchWords = async () => {
-      const response = await fetch(
-        'https://raw.githubusercontent.com/dwyl/english-words/master/words_dictionary.json',
-      );
-      const data = await response.json();
-      const wordList = Object.keys(data);
-      setWords(wordList);
-    };
-
-    fetchWords();
-  }, []);
+  if (isLoading || isError) {
+    return <EmptyList error={isError} loading={isLoading} refetch={refetch} />;
+  }
 
   return (
-    <FlatList
-      data={words}
-      keyExtractor={item => item}
-      renderItem={renderItem}
-      numColumns={3}
-      maxToRenderPerBatch={20}
-    />
+    <>
+      {data?.words && (
+        <FlatList
+          data={data.words}
+          keyExtractor={item => item}
+          renderItem={renderItem}
+          numColumns={3}
+          maxToRenderPerBatch={20}
+        />
+      )}
+    </>
   );
 }

@@ -16,70 +16,20 @@ export const buttonPresets: Record<
     disabled: ButtonUI;
   }
 > = {
-  primary: {
-    default: {
-      container: {
-        backgroundColor: 'primary',
-      },
-      content: {color: 'primaryContrast'},
-    },
-    disabled: {
-      container: {
-        backgroundColor: 'gray4',
-      },
-      content: {color: 'gray2'},
-    },
-  },
   outline: {
     default: {
       container: {
         borderWidth: 1,
-        borderColor: 'primary',
+        borderColor: 'grayBlack',
       },
-      content: {color: 'primary'},
+      content: {color: 'grayBlack'},
     },
     disabled: {
       container: {
         borderWidth: 1,
         borderColor: 'gray4',
       },
-      content: {color: 'gray2'},
-    },
-  },
-  ghost: {
-    default: {
-      container: {
-        backgroundColor: 'white70',
-        height: 40,
-      },
-      content: {
-        color: 'grayBlack',
-        textProps: {
-          preset: 'paragraphSmall',
-          bold: false,
-        },
-      },
-    },
-    disabled: {
-      container: {
-        backgroundColor: 'grayWhite',
-        height: 40,
-      },
-      content: {color: 'grayBlack'},
-    },
-  },
-  gray: {
-    default: {
-      container: {
-        backgroundColor: 'buttonGrayContainer',
-      },
-      content: {color: 'buttonGrayContent'},
-    },
-    disabled: {
-      container: {
-        backgroundColor: 'gray4',
-      },
-      content: {color: 'gray2'},
+      content: {color: 'gray4'},
     },
   },
 };

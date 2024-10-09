@@ -5,7 +5,7 @@ import {TouchableOpacityBox, TouchableOpacityBoxProps} from '../Box/Box';
 import {ActivityIndicator} from '../ActivityIndicator/ActivityIndicator';
 import {Text} from '../Text/Text';
 
-export type ButtonPreset = 'primary' | 'outline' | 'ghost' | 'gray';
+export type ButtonPreset = 'outline';
 
 export interface ButtonProps extends TouchableOpacityBoxProps {
   title: string;
@@ -17,20 +17,19 @@ export interface ButtonProps extends TouchableOpacityBoxProps {
 export function Button({
   title,
   loading,
-  preset = 'primary',
+  preset = 'outline',
   disabled,
   ...touchableOpacityBoxProps
 }: ButtonProps) {
   const buttonPreset = buttonPresets[preset][disabled ? 'disabled' : 'default'];
   return (
     <TouchableOpacityBox
-      testID="button"
       disabled={disabled || loading}
       paddingHorizontal="s20"
-      height={50}
+      width={'100%'}
+      height={45}
       alignItems="center"
       justifyContent="center"
-      borderRadius="s16"
       {...buttonPreset.container}
       {...touchableOpacityBoxProps}>
       {loading ? (
