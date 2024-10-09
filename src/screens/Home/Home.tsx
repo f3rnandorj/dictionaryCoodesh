@@ -1,11 +1,11 @@
 import React from 'react';
-import {Box} from '../../components/Box/Box';
 import {Text} from '../../components/Text/Text';
+import {Screen} from '../../components/Screen/Screen';
 
 export function Home() {
   return (
-    <Box>
-      <Text>Hello world</Text>
-    </Box>
+    <Screen flex={1}>
+      <Text>hello world</Text>
+    </Screen>
   );
 }

@@ -1,18 +1,19 @@
 import React from 'react';
-import {SafeAreaView, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
 
 import {Home} from './src/screens/Home/Home';
 import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 function App(): React.JSX.Element {
   return (
-    <ThemeProvider theme={theme}>
-      <SafeAreaView>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
         <StatusBar barStyle="dark-content" />
         <Home />
-      </SafeAreaView>
-    </ThemeProvider>
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
 
