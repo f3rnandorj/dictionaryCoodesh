@@ -47,7 +47,7 @@ export function PlayWord({word}: Props) {
 
   function fillProgressBar(count: number, duration?: number) {
     fillWidth.value = withTiming(count, {
-      duration: duration ?? 300,
+      duration: duration || 300,
       easing: Easing.linear,
     });
   }

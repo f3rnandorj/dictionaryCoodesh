@@ -28,7 +28,7 @@ export function EmptyData({
 
         <Button
           width={'100%'}
-          title={buttonTitle ?? 'Tentar novamente'}
+          title={buttonTitle || 'Tentar novamente'}
           onPress={onErrorPressButton}
         />
       </Box>

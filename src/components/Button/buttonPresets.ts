@@ -27,9 +27,9 @@ export const buttonPresets: Record<
     disabled: {
       container: {
         borderWidth: 1,
-        borderColor: 'gray4',
+        borderColor: 'gray3',
       },
-      content: {color: 'gray4'},
+      content: {color: 'gray3'},
     },
   },
 };

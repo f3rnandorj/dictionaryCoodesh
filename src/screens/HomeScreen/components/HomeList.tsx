@@ -26,7 +26,7 @@ export function HomeList({words, onPressItem}: HomeListProps) {
       onPressItem && onPressItem(item);
 
       showModal({
-        children: () => WordDetailsScreen({word: item, hideModal}),
+        children: () => WordDetailsScreen({word: item, hideModal, list: words}),
       });
     }
 

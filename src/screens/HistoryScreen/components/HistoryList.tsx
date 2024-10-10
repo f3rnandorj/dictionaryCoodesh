@@ -18,7 +18,8 @@ export function HistoryList() {
   function renderItem({item}: ListRenderItemInfo<string>) {
     function handlePressItem() {
       showModal({
-        children: () => WordDetailsScreen({word: item, hideModal}),
+        children: () =>
+          WordDetailsScreen({word: item, hideModal, list: wordList || []}),
       });
     }
 

@@ -9,14 +9,17 @@ import {Button} from '../../components/Button/Button';
 import {PlayWord} from './components/PlayWord';
 
 interface Props {
+  list: string[];
   word: string;
   hideModal: () => void;
 }
 
-export function WordDetailsScreen({word, hideModal}: Props) {
+export function WordDetailsScreen({list, word, hideModal}: Props) {
   const [hasDefinition, setHasDefinition] = useState(true);
+  const [showingWord, setShowingWord] = useState(word);
+
   const {data, isError, isLoading, refetch} = useDictionaryGetWordDetails(
-    word,
+    showingWord,
     {
       onError: error => {
         if (error?.statusCode && error.statusCode === 404) {
@@ -25,6 +28,8 @@ export function WordDetailsScreen({word, hideModal}: Props) {
       },
     },
   );
+
+  const wordIndex = list.findIndex(w => w === showingWord);
 
   if (isLoading || isError || !data) {
     return (
@@ -54,7 +59,7 @@ export function WordDetailsScreen({word, hideModal}: Props) {
         backgroundColor="primary">
         <Text preset="paragraphLarge">{data?.word}</Text>
         <Text preset="paragraphLarge">
-          {data?.phonetics?.text ?? 'Fonética não encontrada'}
+          {data?.phonetics?.text || 'Fonética não encontrada'}
         </Text>
       </Box>
 
@@ -72,14 +77,24 @@ export function WordDetailsScreen({word, hideModal}: Props) {
       {data?.meanings.map(meaning =>
         meaning.definitions.map((definition, index) => (
           <Text key={index} preset="paragraphSmall">
-            - {`${definition?.definition ?? 'Nenhuma definição encontrada'}`}
+            - {`${definition?.definition || 'Nenhuma definição encontrada'}`}
           </Text>
         )),
       )}
 
       <Box flexDirection="row" gap="s10">
-        <Button flex={1} title="Voltar" />
-        <Button flex={1} title="Próximo" />
+        <Button
+          flex={1}
+          title="Voltar"
+          onPress={() => setShowingWord(list[wordIndex - 1])}
+          disabled={wordIndex === 0}
+        />
+        <Button
+          flex={1}
+          title="Próximo"
+          onPress={() => setShowingWord(list[wordIndex + 1])}
+          disabled={wordIndex === list.length - 1}
+        />
       </Box>
     </Screen>
   );

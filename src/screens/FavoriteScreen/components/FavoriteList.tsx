@@ -19,7 +19,12 @@ export function FavoriteList() {
   function renderItem({item}: ListRenderItemInfo<Word>) {
     function handlePressItem() {
       showModal({
-        children: () => WordDetailsScreen({word: item.word, hideModal}),
+        children: () =>
+          WordDetailsScreen({
+            word: item.word,
+            hideModal,
+            list: favoriteWordList?.map(listItem => listItem.word) || [],
+          }),
       });
     }
 
