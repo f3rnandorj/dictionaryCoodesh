@@ -13,7 +13,7 @@ interface Props {
   hideModal: () => void;
 }
 
-export function WordDetails({word, hideModal}: Props) {
+export function WordDetailsScreen({word, hideModal}: Props) {
   const [hasDefinition, setHasDefinition] = useState(true);
   const {data, isError, isLoading, refetch} = useDictionaryGetWordDetails(
     word,

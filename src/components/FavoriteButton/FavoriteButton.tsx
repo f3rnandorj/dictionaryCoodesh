@@ -43,6 +43,7 @@ export function FavoriteButton({data}: Props) {
       hitSlop={20}>
       <Text pr="s10">Adicionar aos favoritos</Text>
       <Icon
+        size={30}
         name={isFavoriteWord ? 'star' : 'star-outline'}
         color={isFavoriteWord ? 'starColor' : 'backgroundContrast'}
       />

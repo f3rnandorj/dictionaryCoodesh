@@ -18,9 +18,9 @@ export function FavoriteList() {
     );
   }
 
-  const formattedList: Dictionary = {
-    words: favoriteWordList.map(item => item.word),
-  };
+  const formattedList: Dictionary['words'] = favoriteWordList.map(
+    item => item.word,
+  );
 
-  return formattedList ? <WordList data={formattedList} /> : null;
+  return formattedList ? <WordList words={formattedList} /> : null;
 }

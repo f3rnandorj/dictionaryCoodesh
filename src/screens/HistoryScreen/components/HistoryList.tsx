@@ -5,16 +5,20 @@ import {Text} from '../../../components/Text/Text';
 import {Icon} from '../../../components/Icon/Icon';
 import {useSeenWordHistory} from '../../../services/seenWordHistory/useSeenWordHistory';
 import {useModal} from '../../../services/modal/useModal';
-import {WordDetails} from '../../WordDetails/WordDetails';
+import {WordDetailsScreen} from '../../WordDetailsScreen/WordDetailsScreen';
+import {useScrollToTop} from '@react-navigation/native';
 
 export function HistoryList() {
   const {wordList, removeWord} = useSeenWordHistory();
   const {showModal, hideModal} = useModal();
 
+  const flatListRef = React.useRef<FlatList<string>>(null);
+  useScrollToTop(flatListRef);
+
   function renderItem({item}: ListRenderItemInfo<string>) {
     function handlePressItem() {
       showModal({
-        children: () => WordDetails({word: item, hideModal}),
+        children: () => WordDetailsScreen({word: item, hideModal}),
       });
     }
 
@@ -33,8 +37,9 @@ export function HistoryList() {
 
   return (
     <FlatList
-      bounces={false}
+      ref={flatListRef}
       data={wordList}
+      bounces={false}
       renderItem={renderItem}
       ItemSeparatorComponent={ItemSeparatorComponent}
       ListEmptyComponent={listEmptyComponent}

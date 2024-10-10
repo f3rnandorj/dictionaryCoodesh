@@ -4,15 +4,19 @@ import {FlatList, ListRenderItemInfo} from 'react-native';
 import {PressableBox} from '../Box/Box';
 import {useModal} from '../../services/modal/useModal';
 import {Dictionary} from '../../domain/Dictionary/dictionaryTypes';
-import {WordDetails} from '../../screens/WordDetails/WordDetails';
+import {WordDetailsScreen} from '../../screens/WordDetailsScreen/WordDetailsScreen';
+import {useScrollToTop} from '@react-navigation/native';
 
 interface WordListProps {
-  data: Dictionary;
+  words: Dictionary['words'];
   onPressItem?: (word: string) => void;
 }
 
-export function WordList({data, onPressItem}: WordListProps) {
+export function WordList({words, onPressItem}: WordListProps) {
   const {showModal, hideModal} = useModal();
+
+  const flatListRef = React.useRef<FlatList<string>>(null);
+  useScrollToTop(flatListRef);
 
   function renderItem({item, index}: ListRenderItemInfo<string>) {
     const isFirstColumn = index % 3 === 0;
@@ -22,7 +26,7 @@ export function WordList({data, onPressItem}: WordListProps) {
       onPressItem && onPressItem(item);
 
       showModal({
-        children: () => WordDetails({word: item, hideModal}),
+        children: () => WordDetailsScreen({word: item, hideModal}),
       });
     }
 
@@ -44,9 +48,10 @@ export function WordList({data, onPressItem}: WordListProps) {
 
   return (
     <>
-      {data?.words && (
+      {words && (
         <FlatList
-          data={data.words}
+          ref={flatListRef}
+          data={words}
           keyExtractor={item => item}
           renderItem={renderItem}
           numColumns={3}

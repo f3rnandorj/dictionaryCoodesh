@@ -60,9 +60,9 @@ Nessa etapa você deverá desenvolver uma aplicação móvel nativa ou hibrida p
 
 <!-- <img src="./img/wireframe.png" width="100%" /> -->
 
-**Diferencial 1** - Implementar um tocador de audio utilizando, por exemplo, https://responsivevoice.org/api ou recursos nativos;
+<!-- **Diferencial 1** - Implementar um tocador de audio utilizando, por exemplo, https://responsivevoice.org/api ou recursos nativos; -->
 
-**Diferencial 2** - Utilizar alguma ferramenta de Injeção de Dependência;
+<!-- **Diferencial 2** - Utilizar alguma ferramenta de Injeção de Dependência; -->
 
 **Diferencial 3** - Escrever Unit Tests ou E2E Test. Escolher a melhor abordagem e biblioteca;
 

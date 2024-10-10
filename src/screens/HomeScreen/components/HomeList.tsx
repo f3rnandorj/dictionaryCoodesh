@@ -20,5 +20,5 @@ export function HomeList() {
     );
   }
 
-  return data ? <WordList data={data} onPressItem={addWord} /> : null;
+  return data ? <WordList words={data.words} onPressItem={addWord} /> : null;
 }
