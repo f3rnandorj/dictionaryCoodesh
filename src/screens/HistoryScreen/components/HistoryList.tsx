@@ -5,7 +5,7 @@ import {Text} from '../../../components/Text/Text';
 import {Icon} from '../../../components/Icon/Icon';
 import {useSeenWordHistory} from '../../../services/seenWordHistory/useSeenWordHistory';
 import {useModal} from '../../../services/modal/useModal';
-import {WordDetails} from '../../../components/WordDetails/WordDetails';
+import {WordDetails} from '../../WordDetails/WordDetails';
 
 export function HistoryList() {
   const {wordList, removeWord} = useSeenWordHistory();

@@ -4,7 +4,7 @@ import {FlatList, ListRenderItemInfo} from 'react-native';
 import {PressableBox} from '../Box/Box';
 import {useModal} from '../../services/modal/useModal';
 import {Dictionary} from '../../domain/Dictionary/dictionaryTypes';
-import {WordDetails} from '../WordDetails/WordDetails';
+import {WordDetails} from '../../screens/WordDetails/WordDetails';
 
 interface WordListProps {
   data: Dictionary;
