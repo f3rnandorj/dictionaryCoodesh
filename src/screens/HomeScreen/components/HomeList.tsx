@@ -1,24 +1,63 @@
 import React from 'react';
-import {useDictionaryGetWordsList} from '../../../domain/Dictionary/useCases/useDictionaryGetWordsList';
-import {EmptyData} from '../../../components/EmptyData/EmptyData';
-import {WordList} from '../../../components/WordList/WordList';
-import {useSeenWordHistory} from '../../../services/seenWordHistory/useSeenWordHistory';
+import {Text} from '../../../components/Text/Text';
+import {FlatList, ListRenderItemInfo} from 'react-native';
+import {PressableBox} from '../../../components/Box/Box';
+import {useModal} from '../../../services/modal/useModal';
+import {Dictionary} from '../../../domain/Dictionary/dictionaryTypes';
+import {WordDetailsScreen} from '../../WordDetailsScreen/WordDetailsScreen';
+import {useScrollToTop} from '@react-navigation/native';
 
-export function HomeList() {
-  const {data, isError, isLoading, refetch} = useDictionaryGetWordsList();
+interface HomeListProps {
+  words: Dictionary['words'];
+  onPressItem?: (word: string) => void;
+}
 
-  const {addWord} = useSeenWordHistory();
+export function HomeList({words, onPressItem}: HomeListProps) {
+  const {showModal, hideModal} = useModal();
 
-  if (isLoading || isError) {
+  const flatListRef = React.useRef<FlatList<string>>(null);
+  useScrollToTop(flatListRef);
+
+  function renderItem({item, index}: ListRenderItemInfo<string>) {
+    const isFirstColumn = index % 3 === 0;
+    const isLastColumn = index % 3 === 2;
+
+    function handlePressItem() {
+      onPressItem && onPressItem(item);
+
+      showModal({
+        children: () => WordDetailsScreen({word: item, hideModal}),
+      });
+    }
+
     return (
-      <EmptyData
-        error={isError}
-        messageError="Erro ao buscar a lista..."
-        loading={isLoading}
-        onErrorPressButton={refetch}
-      />
+      <PressableBox
+        flex={1}
+        justifyContent="center"
+        alignItems="center"
+        height={90}
+        paddingHorizontal="s12"
+        borderWidth={0.3}
+        borderRightWidth={isFirstColumn ? 0 : 0.3}
+        borderLeftWidth={isLastColumn ? 0 : 0.3}
+        onPress={handlePressItem}>
+        <Text>{item}</Text>
+      </PressableBox>
     );
   }
 
-  return data ? <WordList words={data.words} onPressItem={addWord} /> : null;
+  return (
+    <>
+      {words && (
+        <FlatList
+          ref={flatListRef}
+          data={words}
+          keyExtractor={item => item}
+          renderItem={renderItem}
+          numColumns={3}
+          maxToRenderPerBatch={20}
+        />
+      )}
+    </>
+  );
 }
