@@ -19,13 +19,23 @@ interface Props {
 export function PlayWord({word}: Props) {
   let fillWidth = useSharedValue(0);
 
+  function estimateDuration(_word: string) {
+    const baseDuration = 800;
+    const durationPerCharacter = 100;
+
+    return _word.length <= 7
+      ? baseDuration
+      : _word.length * durationPerCharacter;
+  }
+
   const {colors, borderRadii} = useAppTheme();
   const {play} = useSpeaker({
     onStart: () => {
       fillProgressBar(0);
     },
     onProgress: () => {
-      fillProgressBar(1, 800);
+      const estimatedDuration = estimateDuration(word);
+      fillProgressBar(1, estimatedDuration);
     },
     onFinish: () => {
       fillProgressBar(1, 50);

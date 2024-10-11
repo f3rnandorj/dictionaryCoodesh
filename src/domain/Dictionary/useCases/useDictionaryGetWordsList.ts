@@ -1,12 +1,12 @@
-import {useQuery} from 'react-query';
+import {useQuery} from '@tanstack/react-query';
 import {QueryKeys} from '../../../infra/infraTypes';
 import {dictionaryService} from '../dictionaryService';
 
 export function useDictionaryGetWordsList() {
-  const {data, isError, isLoading, refetch} = useQuery(
-    QueryKeys.DictionaryWordList,
-    dictionaryService.getWordsList,
-  );
+  const {data, isError, isLoading, refetch} = useQuery({
+    queryKey: [QueryKeys.DictionaryWordList],
+    queryFn: dictionaryService.getWordsList,
+  });
 
   return {
     data,

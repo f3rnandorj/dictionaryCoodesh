@@ -1,37 +1,34 @@
-import {useQuery} from 'react-query';
-import {Options, QueryKeys} from '../../../infra/infraTypes';
-import {dictionaryService} from '../dictionaryService';
+import {QueryKeys} from '../../../infra/infraTypes';
 import {errorUtils} from '../../../utils/errorUtils';
-import {Word} from '../dictionaryTypes';
+import {dictionaryService} from '../dictionaryService';
+import {useQuery} from '@tanstack/react-query';
 
-export function useDictionaryGetWordDetails(
-  word: string,
-  options?: Options<Word>,
-) {
-  const {data, isError, isLoading, refetch} = useQuery(
-    [QueryKeys.DictionaryWordDetail, word],
-    () => dictionaryService.getWordDetails(word),
-    {
-      enabled: word.length > 0,
-      retry: false,
-      onSuccess: details => {
-        if (options?.onSuccess) {
-          options?.onSuccess(details);
-        }
-      },
-      onError: error => {
-        if (options?.onError) {
-          options?.onError({
-            message: errorUtils.getErrorMessage(error),
-            statusCode: errorUtils.getErrorStatusCode(error),
-          });
-        }
-      },
-    },
-  );
+export function useDictionaryGetWordDetails(word: string) {
+  const {
+    data,
+    isError,
+    isLoading,
+    refetch,
+    error: queryError,
+  } = useQuery({
+    queryKey: [QueryKeys.DictionaryWordDetail, word],
+    queryFn: () => dictionaryService.getWordDetails(word),
+    enabled: word.length > 0,
+    retry: false,
+  });
+
+  let error;
+
+  if (queryError) {
+    error = {
+      message: errorUtils.getErrorMessage(queryError),
+      statusCode: errorUtils.getErrorStatusCode(queryError),
+    };
+  }
 
   return {
     data,
+    error,
     isError,
     isLoading,
     refetch,

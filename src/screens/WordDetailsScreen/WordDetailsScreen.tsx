@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDictionaryGetWordDetails} from '../../domain/Dictionary/useCases/useDictionaryGetWordDetails';
 import {EmptyData} from '../../components/EmptyData/EmptyData';
 import {Screen} from '../../components/Screen/Screen';
@@ -18,18 +18,16 @@ export function WordDetailsScreen({list, word, hideModal}: Props) {
   const [hasDefinition, setHasDefinition] = useState(true);
   const [showingWord, setShowingWord] = useState(word);
 
-  const {data, isError, isLoading, refetch} = useDictionaryGetWordDetails(
-    showingWord,
-    {
-      onError: error => {
-        if (error?.statusCode && error.statusCode === 404) {
-          setHasDefinition(false);
-        }
-      },
-    },
-  );
+  const {data, isError, isLoading, refetch, error} =
+    useDictionaryGetWordDetails(showingWord);
 
   const wordIndex = list.findIndex(w => w === showingWord);
+
+  useEffect(() => {
+    if (error?.statusCode && error.statusCode === 404) {
+      setHasDefinition(false);
+    }
+  }, [error]);
 
   if (isLoading || isError || !data) {
     return (
