@@ -54,6 +54,7 @@ export function HomeList({words, onPressItem}: HomeListProps) {
           data={words}
           keyExtractor={item => item}
           renderItem={renderItem}
+          bounces={false}
           numColumns={3}
           maxToRenderPerBatch={20}
         />

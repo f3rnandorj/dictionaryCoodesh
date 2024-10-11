@@ -31,12 +31,10 @@ export function useSpeaker({onStart, onProgress, onFinish}: Props) {
     // Listener for TTS progress (triggered repeatedly while speaking)
     Tts.addEventListener('tts-progress', () => {
       onProgress && onProgress();
-      console.log('progress');
     });
     // Listener for when TTS finishes speaking
     Tts.addEventListener('tts-finish', () => {
       onFinish && onFinish();
-      console.log('finish');
     });
     // Listener for when TTS is canceled
     Tts.addEventListener('tts-cancel', () => {});

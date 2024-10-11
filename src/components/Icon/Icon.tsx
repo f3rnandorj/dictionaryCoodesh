@@ -5,10 +5,10 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ThemeColors} from '../../theme/theme';
 import {useAppTheme} from '../../hooks/useAppTheme';
 
-export type IconNameProps = typeof MaterialIconProps;
+export type IconName = typeof MaterialIconProps;
 
 interface Props extends TouchableOpacityBoxProps {
-  name: keyof IconNameProps;
+  name: keyof IconName;
   size?: number;
   color?: ThemeColors;
   onPress?: () => void;
@@ -21,12 +21,13 @@ export function Icon({
   disabled,
   onPress,
   size = 26,
+  style,
   ...touchableOpacityBoxProps
 }: Props) {
   const {colors, spacing} = useAppTheme();
 
   return (
-    <Box style={{marginLeft: -spacing.s4}}>
+    <Box style={[{marginLeft: -spacing.s4}, style]}>
       {onPress ? (
         <TouchableOpacityBox
           disabled={disabled}
