@@ -45,6 +45,7 @@ function tryGetAxiosErrorMessage(error: unknown): string | null {
           .join(', ');
       }
     }
+
     return null;
   } catch (err) {
     return null;
