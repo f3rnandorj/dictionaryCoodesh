@@ -10,7 +10,7 @@ import {Icon, IconName} from '../Icon/Icon';
 
 interface InputProps extends RNTextInputProps {
   label?: string;
-  boxProps: BoxProps;
+  boxProps?: BoxProps;
   rightComponentName?: keyof IconName;
 }
 

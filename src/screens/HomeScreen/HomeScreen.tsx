@@ -5,7 +5,7 @@ import {useDictionaryGetWordsList} from '../../domain/Dictionary/useCases/useDic
 import {useSeenWordHistory} from '../../services/seenWordHistory/useSeenWordHistory';
 import {HomeList} from './components/HomeList';
 import {EmptyData} from '../../components/EmptyData/EmptyData';
-import {TextInput} from '../../components/Input/Input';
+import {TextInput} from '../../components/TextInput/TextInput';
 import {Keyboard, TouchableWithoutFeedback} from 'react-native';
 
 export function HomeScreen({}: AppTabScreenProps<'HomeScreen'>) {

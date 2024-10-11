@@ -27,7 +27,7 @@ export function Icon({
   const {colors, spacing} = useAppTheme();
 
   return (
-    <Box style={[{marginLeft: -spacing.s4}, style]}>
+    <Box testID={name} style={[{marginLeft: -spacing.s4}, style]}>
       {onPress ? (
         <TouchableOpacityBox
           disabled={disabled}
