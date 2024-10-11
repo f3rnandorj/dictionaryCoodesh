@@ -5,11 +5,11 @@ import {ThemeProvider} from '@shopify/restyle';
 import {theme} from './src/theme/theme';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Router} from './src/routes/Routes';
-import {QueryClient, QueryClientProvider} from 'react-query';
 import {ContextProviders} from './src/context';
 import {Modal} from './src/components/Modal/Modal';
 import {initializeStorage} from './src/services/storage/storage';
 import {MMKVStorage} from './src/services/storage/implementation/MMKVStorage';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 initializeStorage(MMKVStorage);
 
