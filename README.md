@@ -73,25 +73,26 @@ No caminho src/test temos outros dois arquivos de setup, são eles:
 1. Criação do projeto e dos componentes basicos.
 2. Instalação e configuração React Navigation.
 3. Instalação e configuraçao Material Top Tab, para criação das tabs de navegação.
-4. Criação de camadas de domínio do dicionário (interface, API, service, adapter and use cases).
-5. Criação de camadas de serviço modal (interface, context, provider, component).
-6. Criação da tela de detalhes usada com o serviço de modal (WorkDetails).
-7. Criação de camadas de WordDetails (interface, API, service, adapter and use cases).
-8. Tratar possíveis erros com definições inexistentes para uma palavra específica.
-9. Criação do serviço de armazenamento local usando MMKV.
-10. Criação do serviço de palavras favoritas utilizando a context API e o MMKV.
-11. Criação da tela de Favoritos.
-12. Criação do serviço de histórico de palavras visualizadas utilizando a context API e o MMKV.
-13. Criação da tela HistoryScreen.
-14. Criar barra de progresso animada.
-15. Implementação de scroll para o topo nas listas.
-16. Criação da lógica para botões de ir adiante e voltar na tela WordDetails.
-17. Criação do componente Input para permitir buscas na lista principal.
-18. Implementação de testes unitários para errorUtils.
-19. Instalação e configuração a biblioteca de testes para componentes do React Native.
-20. Implementação de testes para o componente TextInput e Button.
-21. Criação de testes para o hook useAppSafeArea.
-22. Optmizar a animação da barra de progresso ao reproduzir palavra.
+4. Instalação e configuração do React Query para lidar com fetching e cash das chamadas a API.
+5. Criação de camadas de domínio do dicionário (interface, API, service, adapter and use cases).
+6. Criação de camadas de serviço modal (interface, context, provider, component).
+7. Criação da tela de detalhes usada com o serviço de modal (WorkDetails).
+8. Criação de camadas de WordDetails (interface, API, service, adapter and use cases).
+9. Tratar possíveis erros com definições inexistentes para uma palavra específica.
+10. Criação do serviço de armazenamento local usando MMKV.
+11. Criação do serviço de palavras favoritas utilizando a context API e o MMKV.
+12. Criação da tela de Favoritos.
+13. Criação do serviço de histórico de palavras visualizadas utilizando a context API e o MMKV.
+14. Criação da tela HistoryScreen.
+15. Criar barra de progresso animada.
+16. Implementação de scroll para o topo nas listas.
+17. Criação da lógica para botões de ir adiante e voltar na tela WordDetails.
+18. Criação do componente Input para permitir buscas na lista principal.
+19. Implementação de testes unitários para errorUtils.
+20. Instalação e configuração a biblioteca de testes para componentes do React Native.
+21. Implementação de testes para o componente TextInput e Button.
+22. Criação de testes para o hook useAppSafeArea.
+23. Optmizar a animação da barra de progresso ao reproduzir palavra.
 
 
 > This is a challenge by [Coodesh](https://coodesh.com/)
