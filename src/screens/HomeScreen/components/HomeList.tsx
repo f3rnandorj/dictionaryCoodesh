@@ -10,9 +10,10 @@ import {useScrollToTop} from '@react-navigation/native';
 interface HomeListProps {
   words: Dictionary['words'];
   onPressItem?: (word: string) => void;
+  loadMoreItens: () => void;
 }
 
-export function HomeList({words, onPressItem}: HomeListProps) {
+export function HomeList({words, onPressItem, loadMoreItens}: HomeListProps) {
   const {showModal, hideModal} = useModal();
 
   const flatListRef = React.useRef<FlatList<string>>(null);
@@ -56,7 +57,9 @@ export function HomeList({words, onPressItem}: HomeListProps) {
           renderItem={renderItem}
           bounces={false}
           numColumns={3}
-          maxToRenderPerBatch={20}
+          maxToRenderPerBatch={100}
+          onEndReached={loadMoreItens}
+          onEndReachedThreshold={0.3}
         />
       )}
     </>

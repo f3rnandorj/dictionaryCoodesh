@@ -36,7 +36,7 @@ export function WordDetailsScreen({list, word, hideModal}: Props) {
         messageError={
           hasDefinition
             ? 'Erro ao buscar detalhes, tente novamente.'
-            : `Detalhes da palavra "${word}" não disponíveis`
+            : `Detalhes da palavra "${showingWord}" não disponíveis`
         }
         loading={isLoading}
         onErrorPressButton={hasDefinition ? refetch : hideModal}
@@ -55,7 +55,7 @@ export function WordDetailsScreen({list, word, hideModal}: Props) {
         gap="s10"
         borderWidth={1}
         backgroundColor="primary">
-        <Text preset="paragraphLarge">{data?.word}</Text>
+        <Text preset="paragraphLarge">{showingWord}</Text>
         <Text preset="paragraphLarge">
           {data?.phonetics?.text || 'Fonética não encontrada'}
         </Text>
@@ -63,7 +63,7 @@ export function WordDetailsScreen({list, word, hideModal}: Props) {
 
       <FavoriteButton data={data} />
 
-      <PlayWord word={word} />
+      <PlayWord word={showingWord} />
 
       <Box>
         <Text preset="headingLarge" bold>

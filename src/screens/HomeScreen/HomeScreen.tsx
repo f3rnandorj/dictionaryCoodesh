@@ -1,17 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Screen} from '../../components/Screen/Screen';
 import {AppTabScreenProps} from '../../routes/navigationType';
 import {useDictionaryGetWordsList} from '../../domain/Dictionary/useCases/useDictionaryGetWordsList';
 import {useSeenWordHistory} from '../../services/seenWordHistory/useSeenWordHistory';
 import {HomeList} from './components/HomeList';
 import {EmptyData} from '../../components/EmptyData/EmptyData';
-import {TextInput} from '../../components/TextInput/TextInput';
+
 import {Keyboard, TouchableWithoutFeedback} from 'react-native';
 
 export function HomeScreen({}: AppTabScreenProps<'HomeScreen'>) {
-  const [searchValue, setSearchValue] = useState('');
-
-  const {data, isError, isLoading, refetch} = useDictionaryGetWordsList();
+  const {data, isError, isLoading, refetchList, loadMoreItens} =
+    useDictionaryGetWordsList();
 
   const {addWord} = useSeenWordHistory();
 
@@ -21,40 +20,21 @@ export function HomeScreen({}: AppTabScreenProps<'HomeScreen'>) {
         error={isError}
         messageError="Erro ao buscar a lista..."
         loading={isLoading}
-        onErrorPressButton={refetch}
+        onErrorPressButton={refetchList}
       />
     );
   }
 
-  const filteredList = data.words
-    .filter(word => word.toLowerCase().includes(searchValue.toLowerCase()))
-    .sort((a, b) => {
-      const startsWithA = a.toLowerCase().startsWith(searchValue.toLowerCase());
-      const startsWithB = b.toLowerCase().startsWith(searchValue.toLowerCase());
-
-      if (startsWithA && !startsWithB) {
-        return -1;
-      } else if (!startsWithA && startsWithB) {
-        return 1;
-      }
-      return 0;
-    });
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Screen flex={1} screenTitle="Word list">
-        <TextInput
-          boxProps={{mb: 's16'}}
-          placeholder="Busque sua palavra"
-          value={searchValue}
-          onChangeText={setSearchValue}
-          rightComponentName={searchValue.length > 0 ? 'close' : 'search-web'}
-          onPressRightIcon={
-            searchValue.length > 0 ? () => setSearchValue('') : undefined
-          }
-        />
-
-        {data ? <HomeList words={filteredList} onPressItem={addWord} /> : null}
+        {data ? (
+          <HomeList
+            words={data}
+            onPressItem={addWord}
+            loadMoreItens={loadMoreItens}
+          />
+        ) : null}
       </Screen>
     </TouchableWithoutFeedback>
   );
