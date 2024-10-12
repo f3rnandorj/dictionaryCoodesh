@@ -99,7 +99,8 @@ No caminho src/test temos outros dois arquivos de setup, são eles:
 20. Instalação e configuração a biblioteca de testes para componentes do React Native.
 21. Implementação de testes para o componente TextInput e Button.
 22. Criação de testes para o hook useAppSafeArea.
-23. Optmizar a animação da barra de progresso ao reproduzir palavra.
+23. Optimização da animação da barra de progresso ao reproduzir palavra.
+24. Optimização de performance da lista principal, com criação de logica de páginação. 
 
 
 > This is a challenge by [Coodesh](https://coodesh.com/)
