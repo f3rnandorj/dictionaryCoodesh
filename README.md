@@ -1,6 +1,13 @@
 # Dictionary Coodesh 📱
 Este é um projeto desenvolvido como parte de um desafio da **Coodesh**. O aplicativo oferece funcionalidades para buscas, visualização de definições de palavras e pronuncia de palavras. Utiliza uma arquitetura bem organizada, baseada nos princípios do **DDD (Domain-Driven Design)**, com a separação clara de camadas de responsabilidade e conceitos de clean code.
 
+
+https://github.com/user-attachments/assets/a2d321cb-b055-429f-88f8-d56c7766480e
+
+
+Video em x1.1 e qualidade 480p
+
+
 ## **Linguagem | Tecnologias | Frameworks**
 ● Typescript <br/>
 ● React Native <br/>
