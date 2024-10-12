@@ -11,6 +11,7 @@ import {useAppTheme} from '../../../hooks/useAppTheme';
 import {useSpeaker} from '../../../services/speaker/useSpeaker';
 import {Box} from '../../../components/Box/Box';
 import {Icon} from '../../../components/Icon/Icon';
+import {Platform} from 'react-native';
 
 interface Props {
   word: string;
@@ -20,8 +21,8 @@ export function PlayWord({word}: Props) {
   let fillWidth = useSharedValue(0);
 
   function estimateDuration(_word: string) {
-    const baseDuration = 800;
-    const durationPerCharacter = 100;
+    const baseDuration = Platform.OS === 'android' ? 400 : 400;
+    const durationPerCharacter = Platform.OS === 'android' ? 50 : 50;
 
     return _word.length <= 7
       ? baseDuration

@@ -8,6 +8,6 @@ export function useAppSafeArea() {
 
   return {
     top: Math.max(top, top > 0 ? spacing.s56 : spacing.s24),
-    bottom: Math.max(bottom, spacing.s20),
+    bottom,
   };
 }

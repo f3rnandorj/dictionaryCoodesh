@@ -64,7 +64,7 @@ Nessa etapa você deverá desenvolver uma aplicação móvel nativa ou hibrida p
 
 <!-- **Diferencial 2** - Utilizar alguma ferramenta de Injeção de Dependência; -->
 
-**Diferencial 3** - Escrever Unit Tests ou E2E Test. Escolher a melhor abordagem e biblioteca;
+<!-- **Diferencial 3** - Escrever Unit Tests ou E2E Test. Escolher a melhor abordagem e biblioteca; -->
 
 **Diferencial 4** - Implementar login com usuário e senha e associar os favoritos e histórico ao ID do usuário, salvando essa informação em banco de dados local ou remoto
 

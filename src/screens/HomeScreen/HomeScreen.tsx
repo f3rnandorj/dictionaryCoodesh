@@ -26,9 +26,19 @@ export function HomeScreen({}: AppTabScreenProps<'HomeScreen'>) {
     );
   }
 
-  const filteredList = data.words.filter(word =>
-    word.toLowerCase().includes(searchValue.toLowerCase()),
-  );
+  const filteredList = data.words
+    .filter(word => word.toLowerCase().includes(searchValue.toLowerCase()))
+    .sort((a, b) => {
+      const startsWithA = a.toLowerCase().startsWith(searchValue.toLowerCase());
+      const startsWithB = b.toLowerCase().startsWith(searchValue.toLowerCase());
+
+      if (startsWithA && !startsWithB) {
+        return -1;
+      } else if (!startsWithA && startsWithB) {
+        return 1;
+      }
+      return 0;
+    });
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -38,7 +48,10 @@ export function HomeScreen({}: AppTabScreenProps<'HomeScreen'>) {
           placeholder="Busque sua palavra"
           value={searchValue}
           onChangeText={setSearchValue}
-          rightComponentName="search-web"
+          rightComponentName={searchValue.length > 0 ? 'close' : 'search-web'}
+          onPressRightIcon={
+            searchValue.length > 0 ? () => setSearchValue('') : undefined
+          }
         />
 
         {data ? <HomeList words={filteredList} onPressItem={addWord} /> : null}

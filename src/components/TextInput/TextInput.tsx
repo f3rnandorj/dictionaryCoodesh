@@ -12,12 +12,15 @@ interface InputProps extends RNTextInputProps {
   label?: string;
   boxProps?: BoxProps;
   rightComponentName?: keyof IconName;
+  onPressRightIcon?: () => void;
 }
 
 export function TextInput({
   label,
   boxProps,
   rightComponentName,
+  onPressRightIcon,
+  value,
   ...textInputProps
 }: InputProps) {
   const {spacing, colors} = useAppTheme();
@@ -38,16 +41,20 @@ export function TextInput({
           placeholderTextColor={colors.gray3}
           autoCapitalize="none"
           autoCorrect={false}
+          value={value}
           style={{
             flex: 1,
             paddingVertical: spacing.s12,
             paddingLeft: spacing.s12,
+            color: colors.backgroundContrast,
           }}
           {...textInputProps}
         />
 
         {rightComponentName && (
           <Icon
+            onPress={onPressRightIcon}
+            disabled={value?.length === 0}
             name={rightComponentName}
             style={{marginRight: spacing.s12, marginLeft: spacing.s12}}
           />

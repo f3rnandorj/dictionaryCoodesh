@@ -1,6 +1,7 @@
 import {useEffect} from 'react';
 import Tts from 'react-native-tts';
 import {speakerService} from './speakerService';
+import {Platform} from 'react-native';
 
 interface Props {
   onStart?: () => void;
@@ -19,10 +20,18 @@ export function useSpeaker({onStart, onProgress, onFinish}: Props) {
       },
     );
 
-    Tts.setDefaultVoice('com.apple.voice.compact.en-US.Samantha');
-    Tts.setDefaultRate(0.1);
+    const voice =
+      Platform.OS === 'android'
+        ? 'en-US-SMTl03'
+        : 'com.apple.voice.compact.en-US.Samantha';
+
+    Tts.setDefaultVoice(voice);
     Tts.setIgnoreSilentSwitch('ignore');
-    Tts.setDefaultPitch(0.7);
+
+    // if (Platform.OS === 'ios') {
+    //   Tts.setDefaultPitch(0.7);
+    //   Tts.setDefaultRate(0.3);
+    // }
 
     // Listener for when TTS starts speaking
     Tts.addEventListener('tts-start', () => {
