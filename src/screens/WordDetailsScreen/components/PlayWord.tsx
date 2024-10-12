@@ -40,6 +40,7 @@ export function PlayWord({word}: Props) {
     },
     onFinish: () => {
       fillProgressBar(1, 50);
+      setTimeout(() => (fillWidth.value = 0), 200);
     },
   });
 

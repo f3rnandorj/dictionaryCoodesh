@@ -54,7 +54,7 @@ export function TextInput({
         {rightComponentName && (
           <Icon
             onPress={onPressRightIcon}
-            disabled={value?.length === 0}
+            disabled={value?.length === 0 && !!onPressRightIcon}
             name={rightComponentName}
             style={{marginRight: spacing.s12, marginLeft: spacing.s12}}
           />
